@@ -2,7 +2,7 @@
 #pragma once
 #include <Windows.h>
 #include <iostream>
-#include <TlHelp32.h> // Required for process scanning
+#include <TlHelp32.h>
 
 class Memory
 {
@@ -56,7 +56,6 @@ public:
         return moduleAddr;
     }
 
-    // Standard Template Read (for single values)
     template <typename T>
     T Read(uintptr_t address) {
         T value;
@@ -64,12 +63,10 @@ public:
         return value;
     }
 
-    // Raw Buffer Read (REQUIRED for the View Matrix array)
     bool Read(uintptr_t address, void* buffer, SIZE_T size) {
         return ReadProcessMemory(this->process, (LPCVOID)address, buffer, size, NULL);
     }
 
-    // Helper for the ESP Matrix
     void ReadMatrix(uintptr_t address, float* matrix) {
         ReadProcessMemory(this->process, (LPCVOID)address, matrix, sizeof(float) * 16, NULL);
     }
@@ -78,4 +75,5 @@ public:
     bool Write(uintptr_t address, T value) {
         return WriteProcessMemory(this->process, (LPVOID)address, &value, sizeof(T), NULL);
     }
+
 };
