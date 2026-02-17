@@ -21,7 +21,7 @@ namespace offsets {
 struct Vector2 { float x, y; };
 struct Vector3 { float x, y, z; };
 
-// WorldToScreen Math
+// WorldToScreen
 bool WorldToScreen(Vector3 pos, Vector2& screen, float matrix[16], int width, int height) {
     float x = pos.x * matrix[0] + pos.y * matrix[4] + pos.z * matrix[8] + matrix[12];
     float y = pos.x * matrix[1] + pos.y * matrix[5] + pos.z * matrix[9] + matrix[13];
@@ -35,4 +35,5 @@ bool WorldToScreen(Vector3 pos, Vector2& screen, float matrix[16], int width, in
     screen.x = (width / 2.0f * nx) + (nx + width / 2.0f);
     screen.y = -(height / 2.0f * ny) + (ny + height / 2.0f);
     return true;
+
 }
